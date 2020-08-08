@@ -6,14 +6,14 @@ node {
    }
    stage('Compile') {
       if (isUnix()) {
-         sh "'usr/share/maven/bin/mvn' clean compile"
+         sh "'usr/share/maven' -Dmaven.test.failure.ignore=true clean compile"
       } else {
          bat(/"${mvnHome}\bin\mvn" -Dmaven.test.failure.ignore clean compile/)
       }
    }
    stage('Code Review') {
    if (isUnix()) {
-   sh "'/usr/share/maven/' clean package"
+   sh "'/usr/share/maven/'-Dmaven.test.failure.ignore=true clean package"
    } else {
    bat(/"${mvnHome}\bin\mvn" -Dmaven.test.failure.ignore clean package/)
    }
@@ -24,7 +24,7 @@ node {
    }
    stage('Integration Test') {
      if (isUnix()) {
-        sh "'/usr/share/maven/' clean verify"
+        sh "'/usr/share/maven/' -Dmaven.test.failure.ignore=true clean verify"
      } else {
         bat(/"${mvnHome}\bin\mvn" -Dmaven.test.failure.ignore clean verify/)
      }
@@ -38,7 +38,7 @@ node {
    }
    stage('Push the Artifacts to Nexus/Jfrog') {
       if (isUnix()) {
-         sh "'/usr/share/maven/' clean deploy"
+         sh "'/usr/share/maven/'-Dmaven.test.failure.ignore=true clean deploy"
       } else {
          bat(/"${mvnHome}\bin\mvn" -Dmaven.test.failure.ignore clean deploy/)
       }

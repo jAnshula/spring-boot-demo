@@ -6,14 +6,14 @@ node {
    }
    stage('Compile') {
       if (isUnix()) {
-         sh "'usr/bin/mvn' -Dmaven.test.failure.ignore clean compile"
+         sh "mvn clean compile"
       } else {
          bat(/"${mvnHome}\bin\mvn" -Dmaven.test.failure.ignore clean compile/)
       }
    }
    stage('Code Review') {
    if (isUnix()) {
-   sh "'${mvnHome}/bin/mvn' -Dmaven.test.failure.ignore clean package"
+   sh "'mvn clean package"
    } else {
    bat(/"${mvnHome}\bin\mvn" -Dmaven.test.failure.ignore clean package/)
    }
@@ -24,28 +24,28 @@ node {
    }
    stage('Integration Test') {
      if (isUnix()) {
-        sh "'${mvnHome}/bin/mvn' -Dmaven.test.failure.ignore clean verify"
+        sh "mvn clean verify"
      } else {
         bat(/"${mvnHome}\bin\mvn" -Dmaven.test.failure.ignore clean verify/)
      }
    }
    stage('Sonar') {
       if (isUnix()) {
-         sh "'${mvnHome}/bin/mvn' sonar:sonar"
+         sh "mvn sonar:sonar"
       } else {
          bat(/"${mvnHome}\bin\mvn" sonar:sonar/)
       }
    }
    stage('Push the Artifacts to Nexus/Jfrog') {
       if (isUnix()) {
-         sh "'${mvnHome}/bin/mvn' -Dmaven.test.failure.ignore clean deploy"
+         sh "mvn clean deploy"
       } else {
          bat(/"${mvnHome}\bin\mvn" -Dmaven.test.failure.ignore clean deploy/)
       }
    }
       stage('Push the Artifacts to Nexus/Jfrog') {
       if (isUnix()) {
-         sh "'${mvnHome}/bin/mvn' -Dmaven.test.failure.ignore clean deploy"
+         sh "mvn clean deploy"
       } else {
          bat(/"${mvnHome}\bin\mvn" -Dmaven.test.failure.ignore clean deploy/)
       }

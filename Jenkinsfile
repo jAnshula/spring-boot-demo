@@ -6,7 +6,7 @@ node {
    }
    stage('Compile') {
       if (isUnix()) {
-         sh "'/usr/share/maven/' clean compile"
+         sh "'usr/share/maven/bin/mvn' clean compile"
       } else {
          bat(/"${mvnHome}\bin\mvn" -Dmaven.test.failure.ignore clean compile/)
       }

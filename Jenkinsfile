@@ -1,5 +1,4 @@
 node {
-   def mvnHome
    stage('Prepare') {
       git 'https://github.com/jAnshula/spring-boot-demo.git'
       mvnHome = tool 'maven'

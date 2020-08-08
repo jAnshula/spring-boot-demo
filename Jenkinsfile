@@ -6,7 +6,7 @@ node {
    }
    stage('Compile') {
       if (isUnix()) {
-         sh "mvn -Dmaven.test.failure.ignore=true clean compile"
+         sh "${mvnHome} -Dmaven.test.failure.ignore=true clean compile"
       } else {
          bat(/"${mvnHome}\bin\mvn" -Dmaven.test.failure.ignore clean compile/)
       }
